@@ -1,0 +1,173 @@
+"execute pathogen#infect()
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'vim-syntastic/syntastic'
+
+Plugin 'SirVer/ultisnips'
+
+Plugin 'ying17zi/vim-live-latex-preview'
+
+Plugin 'altercation/vim-colors-solarized'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+Plugin 'Valloric/YouCompleteMe'
+
+Plugin 'vim-airline/vim-airline'
+
+Plugin 'vim-airline/vim-airline-themes'
+
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'Raimondi/delimitMate'
+
+Plugin 'gabrielsimoes/cfparser.vim'
+
+Plugin 'christoomey/vim-run-interactive'
+
+Plugin 'ap/vim-css-color'
+
+Plugin 'KeitaNakamura/neodark.vim'
+
+Bundle 'daylerees/colour-schemes', { 'rtp': 'vim/' }
+
+Plugin 'scrooloose/nerdtree'
+
+Plugin 'ryanoasis/vim-devicons'
+
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+" JavaScript plugins
+Plugin 'pangloss/vim-javascript'
+Plugin 'jelera/vim-javascript-syntax'
+
+
+"if has('nvim')
+"    Plugin 'bfredl/nvim-ipy'
+"else
+"    Plugin 'ivanov/vim-ipython'
+"endif
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+set ignorecase
+set smartcase
+set hls
+set incsearch
+
+set linebreak
+
+set showcmd
+set number
+set ruler
+set relativenumber
+set autoindent
+set undofile
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+"set rtp+=/lib/python3.6/site-packages/powerline/bindings/vim/
+set timeoutlen=1000 ttimeoutlen=0
+set laststatus=2
+"set t_Co=256
+"set termguicolors
+
+if has("termguicolors") && $TERM == "xterm-256color"
+	set termguicolors
+endif
+
+syntax enable
+let g:neodark#terminal_transparent = 1
+let g:solarized_termtrans = 1
+set background=dark
+if has("termguicolors") && $TERM == "xterm-256color"
+    colorscheme solarized8_dark
+else
+    colorscheme solarized
+endif
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_python_flake8_args = "--max-line-length=160"
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+command C SyntasticCheck
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "passive_filetypes": ["tex"] }
+let g:syntastic_rst_checkers = ["sphinx"]
+
+set exrc
+
+let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
+let g:airline_exclude_preview = 1
+
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:ultisnips_python_style="sphinx"
+
+" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
+
+
+
+
+" settings for youcompleteme
+
+doautocmd FileType
+nnoremap <leader>dd :YcmCompleter GetDoc<cr>
+nnoremap <leader>fx :YcmCompleter FixIt<cr>
+nnoremap <leader>gd :YcmCompleter GoToDeclaration<cr>
+let g:ycm_global_ycm_extra_conf = '/home/yashar/programs/.ycm_global_ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+nnoremap <leader>[ :lprevious<cr>
+nnoremap <leader>] :lnext<cr>
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" vim files
+set undodir=~/.vim/.undo//
+
+set backupdir=~/.vim/.backup//
+
+set directory=~/.vim/.swp//
+
+set backup swapfile
+
+nnoremap <leader>cmp :echo system(printf("g++ --std=c++14 %s -O2 -o a.out", @%))<cr>
+
+
+nnoremap Q A"<esc>:.s/"/\\"/g<cr>$xxa" \| cowsay -n -f moose<esc>A<esc>Ifiglet -k "<esc>!!sh<cr>
+nnoremap R ciw""<esc>P
+
+
+
+
+let g:pymode_python = 'python3'
+
+map <C-n> :NERDTreeToggle<CR>
+
+
+" Disable arrow movement, resize splits instead.
+nnoremap <Up>    :resize -1<CR>
+nnoremap <Down>  :resize +1<CR>
+nnoremap <Left>  :vertical resize -1<CR>
+nnoremap <Right> :vertical resize +1<CR>

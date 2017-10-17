@@ -1,0 +1,46 @@
+
+
+
+
+snippet AlgorithmTemplateDisjointSetUnion "Disjoint Set Union"
+
+int ${1:parrents_array}[${2:MAX_SIZE}];
+
+int root(int v){return $1[v] < 0 ? v : ($1[v] = root($1[v]));}
+void merge(int x,int y){
+	if((x = root(x)) == (y = root(y)))return;
+	if($1[y] < $1[x])
+		swap(x, y);
+	$1[x] += $1[y];
+	$1[y] = x;
+}
+
+memset($1, -1, sizeof($1));$0
+endsnippet
+
+
+
+snippet AlgorithmTemplateBinaryIndexedTree "Binary Indexed Tree"
+
+int ${1:parrents_array}[${2:MAX_SIZE} + 1];
+
+void add(int ind, int val)
+{
+	while(ind<=$2)
+	{
+		$1[ind] ${3:+}= val;
+		ind = ind + (ind & -ind);
+	}
+}
+
+int sum(int ind)
+{
+	int ans = 0;
+	while(ind>0)
+	{
+		ans $3= $1[ind];
+		ind = ind - (ind & -ind);
+	}
+	return ans;
+}
+endsnippet
